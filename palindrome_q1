@@ -1,0 +1,10 @@
+def palindrome():
+    """1) Write code to check a String is palindrome or not? (solution)
+    Palindrome are those String whose reverse is equal to original. 
+    This can be done by using either StringBuffer reverse() method or by technique demonstrated in the solution here."""
+    while True:
+        string = input().upper()
+        if string == string[::-1]:
+            print(string)
+        if 'quit' in input():
+            break
