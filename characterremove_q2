@@ -1,0 +1,32 @@
+def removechar():
+    """2) Write a method which will remove any given character from a String? (solution)
+    hint : you can remove a given character from String by converting it into character array and then using substring() method for removing 
+    them from output string."""
+    print('This is a snippet of code to erase a character from a string, first, enter your sentence')
+    print('What are the characters?')
+    string = input()
+    lst = list(string)
+    print('What is the character you would like to remove?')
+    char = input()
+    while char not in lst:
+        print("This character is not in your word/sentence, try again")
+        char = input()
+    indexnum = lst.index(char) #grab the index of the character from char input
+    lstx = lst[:indexnum] + lst[indexnum+1:] #variable for new list excluding character that was removed from char
+    newlst = ''.join(lstx) #joins back together the list from variable lstx
+    if string.count(char) == 1:
+        print(newlst)
+    if string.count(char) > 1:
+        print(char + ' ' + 'appears more than once, which occurrence would you like to delete?')
+        if char in lst:
+            print('Which instance of', char, 'should be deleted?')
+            #print(string)
+            #print(list(range(len(string)))) #prints the character index
+            enumer = ([pos for pos, i in enumerate(string) if i == char]) #finds the locations (in number) of char
+            print(enumer)
+            whichnum = int(input())
+            if int(whichnum) in enumer:
+                numdel = string[:whichnum] + string[whichnum+1:]
+                print(numdel)
+            else:
+                print("Please try again, incorrect number given")
