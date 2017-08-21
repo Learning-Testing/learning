@@ -20,8 +20,6 @@ def removechar():
         print(char + ' ' + 'appears more than once, which occurrence would you like to delete?')
         if char in lst:
             print('Which instance of', char, 'should be deleted?')
-            #print(string)
-            #print(list(range(len(string)))) #prints the character index
             enumer = ([pos for pos, i in enumerate(string) if i == char]) #finds the locations (in number) of char
             print(enumer)
             whichnum = int(input())
