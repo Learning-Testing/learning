@@ -1,0 +1,19 @@
+def enteryournumber():
+    return input("Please enter your number here: \n")
+
+
+def main():
+    x = enteryournumber()
+    numberlist = []
+    for i in x:
+        numberlist.append(i)
+    reversedlist = []
+    for i in x:
+        reversedlist.append(numberlist[-1])
+        numberlist.remove(numberlist[-1])
+    reversednumber = "".join(str(x) for x in reversedlist)
+    print(reversedlist)
+    print(reversednumber)
+
+
+main()
