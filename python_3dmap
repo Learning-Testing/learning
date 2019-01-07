@@ -2,12 +2,6 @@ alist = []
 for i in range(5):
     alist.append(i)
 
-xlist = alist
-ylist = alist
-zlist = alist
-xyzlist = []
-
-
 def attempt1():
     xlist = alist
     ylist = alist
