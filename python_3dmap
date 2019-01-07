@@ -1,0 +1,45 @@
+alist = []
+for i in range(5):
+    alist.append(i)
+
+xlist = alist
+ylist = alist
+zlist = alist
+xyzlist = []
+
+
+def attempt1():
+    xlist = alist
+    ylist = alist
+    zlist = alist
+    xyzlist = []
+
+    for x in xlist:
+        xvarlist = []
+        for y in ylist:
+            yvarlist = [y]
+            for z in zlist:
+                yvarlist.append(z)
+            xvarlist.append(yvarlist)
+        xyzlist.append(xvarlist)
+
+    print(xyzlist)
+
+    xaxis = xyzlist[0]
+    for i in xaxis:
+        print("x", i)
+    yaxis = xyzlist[0][0]
+    for i in yaxis:
+        print("y", i)
+    zaxis = xyzlist[0][0][4]
+    #for i in zaxis:
+        #print("z", i)
+    print("\n")
+    print("x", xaxis)
+    print("y", yaxis)
+    print("z", zaxis)
+
+    print(xyzlist[1][2][3])
+    print(xyzlist[3][2][1])
+
+attempt1()
