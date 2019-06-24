@@ -1,0 +1,26 @@
+// codeacademy problem
+
+std::vector<int> twosum(std::vector<int> nums, int target)
+{
+	/*
+	given an array of integers return indices of the two numbers such that they add up to a specific target, 
+	don't use same element twice, only one solution
+	*/
+	
+	int i_index = 0;
+	int j_index = 0;
+	for (int i : nums)
+	{
+		for (int j : nums)
+		{
+			if (i + j == target)
+			{
+				std::cout << i_index << ", " << j_index;
+				return { i_index, j_index };
+			}
+			j_index += 1;
+		}
+		i_index += 1;
+	}
+	return {i_index, j_index};
+}
