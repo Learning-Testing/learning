@@ -1,10 +1,12 @@
 # https://leetcode.com/problems/remove-element/ (I think it was this one, can't find any other questions similar on codingbat)
+"""
+2) Write a method which will remove any given character from a String? (solution)
+    hint : you can remove a given character from String by converting it into character array and then using substring() method for removing 
+    them from output string.
+"""
+
 
 def removechar():
-
-    """2) Write a method which will remove any given character from a String? (solution)
-    hint : you can remove a given character from String by converting it into character array and then using substring() method for removing 
-    them from output string."""
     
     print('This is a snippet of code to erase a character from a string, first, enter your sentence')
     print('What are the characters?')
