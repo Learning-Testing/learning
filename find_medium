@@ -1,0 +1,112 @@
+https://codingbat.com/prob/p126968
+
+C++ Version
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+#include <unordered_map>
+
+
+std::vector<int> ourlist()
+{
+    return {6, 1, 9, 4, 3, 7, 6, 1, 8, 9, 2};
+}
+
+
+int minfunc(std::vector<int> passedlist)
+{
+    int z = passedlist[0];
+    for (auto& i : passedlist)
+    {
+        if (i < z)
+        {
+            z = i;
+        }
+    }
+    return z;
+}
+
+
+int maxfunc(std::vector<int> passedlist)
+{
+    int y = passedlist[0];
+    for (auto& i : passedlist)
+    {
+            if (i > y)
+            {
+                y = i;
+            }
+        }
+    return y;
+}
+
+
+int main()
+{
+    std::vector<int> x = ourlist();
+    std::copy(x.begin(), x.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << "\n";
+
+    auto v1 = std::find(x.begin(), x.end(), minfunc(x));
+    if (v1 != x.end())
+    {
+        std::iter_swap(v1, x.end() - 1);
+        x.erase(x.end() - 1);
+    }
+    auto v2 = std::find(x.begin(), x.end(), maxfunc(x));
+    if (v2 != x.end())
+    {
+        std::iter_swap(v2, x.end() - 1);
+        x.erase(x.end() - 1);
+    }
+    std::copy(x.begin(), x.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << "\n";
+
+    int sum_of_elements = 0;
+    for (auto& n : x)
+    {
+        sum_of_elements += n;
+    }
+    int finalval = sum_of_elements/x.size();
+    std::cout << finalval << std::endl;
+    return 0;
+}
+
+
+Python Version
+def ourlist():
+    return [6, 1, 9, 4, 3, 7, 6, 1, 8, 9, 2]
+
+
+def minfunc():
+    x = ourlist()
+    z = x[0]
+    for i in x:
+        if i < z:
+            z = i
+    print(z)
+
+
+def maxfunc():
+    x = ourlist()
+    z = x[0]
+    for i in x:
+        if i > z:
+            z = i
+    print(z)
+
+
+def main():
+    x = ourlist()
+    print(x)
+
+    x.remove(min(x))
+    x.remove(max(x))
+
+    print(x)
+    print(int(sum(x)/len(x)))
+    return int(sum(x)/len(x))
+
+
+main()
