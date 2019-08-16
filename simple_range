@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+
+
+std::vector<int> range(int num1, int num2)
+{
+    std::vector<int> curr_vec;
+    if (num1 < num2)
+    {
+        while (num1 != num2 + 1)
+        {
+            curr_vec.push_back(num1);
+            num1++;
+        }
+        return curr_vec;
+    }
+    else if (num1 > num2)
+    {
+        while (num1 != num2 - 1)
+        {
+            curr_vec.push_back(num1);
+            num1--;
+        }
+    }
+}
+
+
+int main() {
+    std::vector<int> a = range(10, -10);
+    for (auto& i : a)
+    {
+        std::cout << i << std::endl;
+    }
+    return 0;
+}
