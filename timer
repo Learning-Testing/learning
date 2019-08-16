@@ -1,0 +1,23 @@
+double epoch_seconds()
+{
+    std::time_t seconds = std::time(nullptr);
+    return seconds;
+}
+int timer(int n)
+{
+    double start = epoch_seconds();
+    int total_time = 0;
+    while (n > 0)
+    {
+        double end = epoch_seconds();
+        double difference = end - start;
+        start = end;
+        total_time += difference;
+        if (total_time > 1)
+        {
+            total_time = 0;
+            n--;
+        }
+    }
+    return 0;
+}
