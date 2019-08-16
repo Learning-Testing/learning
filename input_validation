@@ -1,0 +1,24 @@
+#include <iostream>
+
+template <class T>
+bool input_validate(T valid1, T valid2, T answer)
+{
+    return (answer == valid1 || answer == valid2);
+}
+
+int main()
+{
+    int n;
+    std::cin >> n;
+    while (!input_validate( 3, 4, n))
+    {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cout << "false" << std::endl;
+        std::cin >> n;
+    }
+    if (input_validate(3, 4, n))
+    {
+        std::cout << "true" << std::endl;
+    }
+}
