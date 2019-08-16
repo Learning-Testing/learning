@@ -1,4 +1,4 @@
-// codeacademy problem
+// https://leetcode.com/problems/two-sum/
 
 std::vector<int> twosum(std::vector<int> nums, int target)
 {
