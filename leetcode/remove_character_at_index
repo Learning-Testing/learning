@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/remove-element/ (I think it was this one, can't find any other questions similar on codingbat)
+
 def removechar():
 
     """2) Write a method which will remove any given character from a String? (solution)
