@@ -1,0 +1,74 @@
+import tkinter as tk
+
+import sql_functions
+import main
+
+
+main.check_if_file_exists()
+
+
+class Window(tk.Frame):
+
+    def __init__(self, master=None):
+        tk.Frame.__init__(self, master)
+        self.master = master
+        self.init_window()
+
+    def init_window(self):
+        self.master.title("GUI")
+        self.master.option_add("*tearOff", False)
+        self.pack(fill=tk.BOTH, expand=1)
+
+        menu = tk.Menu(self.master)
+        self.master.config(menu=menu)
+        file = tk.Menu(menu)
+        file.add_command(label="Exit", command=self.client_exit)
+        menu.add_cascade(label="File", menu=file)
+
+    @staticmethod
+    def client_exit():
+        exit()
+
+    def clear_text(self):
+        self.tk.entry.delete(0, tk.END)
+
+
+fields = redacted
+
+
+def fetch(entries):
+    values_list = []
+    for entry in entries:
+        field = entry[0]
+        text = entry[1].get()
+        values_list.append(text)
+    sql_functions.insert_old_job_data(values_list)
+
+
+def clear(entries):
+    for entry in entries:
+        entry.clear()
+
+
+def makeform(root, fields):
+    entries = []
+    for field in fields:
+        row = tk.Frame(root)
+        lab = tk.Label(row, width=30, text=field, anchor='w')
+        ent = tk.Entry(row)
+        row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+        lab.pack(side=tk.LEFT)
+        ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
+        entries.append((field, ent))
+    return entries
+
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.geometry("400x600")
+    app = Window(root)
+
+    ents = makeform(root, fields)
+    b1 = tk.Button(root, text="Save to DB", command=(lambda e=ents: [fetch(e)]))
+    b1.pack(side=tk.LEFT, padx=5, pady=5)
+    app.mainloop()
