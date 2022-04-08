@@ -1,0 +1,83 @@
+int lastStoneWeight(std::vector<int>& stones)
+{
+	while (stones.size() > 1)
+	{
+		std::cout << "Current vector is: ";
+		for (auto& i : stones)
+		{
+			std::cout << i << " ";
+		}
+		std::cout << std::endl;
+
+		int heaviest = 0;
+		int heaviest_index = 0;
+		int second_heaviest = 0;
+		int second_index = 0;
+
+		for (std::size_t index = 0; index < stones.size(); index++)
+		{
+			
+			int stoneweight = stones[index];
+
+			if (stoneweight > heaviest)
+			{
+				// the old values need to be given to the second heaviest if we find a new heaviest
+				second_heaviest = heaviest;
+				second_index = heaviest_index;
+
+				heaviest = stoneweight;
+				heaviest_index = index;
+			}
+
+			
+			else if (stoneweight > second_heaviest)
+			{
+				second_heaviest = stoneweight;
+				second_index = index;
+			}
+		}
+
+		// add new stone as last item in the vector
+		if (heaviest != second_heaviest)
+		{
+			int new_stone = heaviest - second_heaviest;
+			stones.push_back(new_stone);
+		}
+		
+		std::cout << heaviest << std::endl;
+		std::cout << second_heaviest << std::endl;
+		
+		// always erase the biggest one
+		std::cout << "72 erasing stone " << heaviest << " at " << heaviest_index << std::endl;
+		stones.erase(stones.begin() + heaviest_index);
+
+		// erase the second stone after checking index position
+		if (heaviest_index > second_index)
+		{
+			std::cout << "78 erasing stone " << second_heaviest << " at " << second_index << std::endl;
+			stones.erase(stones.begin() + second_index);
+		}
+		else
+		{
+			std::cout << "83 erasing stone " << second_heaviest << " at " << (second_index - 1) << std::endl;
+			stones.erase(stones.begin() + second_index - 1);
+		}
+	}
+
+	if (stones.size() > 0)
+	{
+		return stones[0];
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int main()
+{
+	std::vector<int> teststones = { 5, 5 };
+	std::vector<int> stones1 = { 3, 7, 8 };
+	std::cout << lastStoneWeight(stones1);
+	return 0;
+}
